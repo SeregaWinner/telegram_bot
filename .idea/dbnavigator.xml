@@ -9,6 +9,12 @@
     <value-preview-text-wrapping value="true" />
     <value-preview-pinned value="false" />
   </component>
+  <component name="DBNavigator.Project.DatabaseBrowserManager">
+    <autoscroll-to-editor value="false" />
+    <autoscroll-from-editor value="true" />
+    <show-object-properties value="true" />
+    <loaded-nodes />
+  </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="02df931e-45d8-426e-b472-ada71f1291f5">
       <console name="Connection" type="STANDARD" schema="" session="Main" />

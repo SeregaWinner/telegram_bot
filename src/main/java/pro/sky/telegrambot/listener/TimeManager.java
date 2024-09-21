@@ -17,25 +17,25 @@ import java.util.List;
 public class TimeManager {
     private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
 
-    private  final NotificationRepository notificationRepository;
-    private  final TelegramBot telegramBot;
-
-    public TimeManager(NotificationRepository notificationRepository, TelegramBot telegramBot) {
-        this.notificationRepository = notificationRepository;
-        this.telegramBot = telegramBot;
-    }
-
-    @Scheduled(cron = "0 0/1 * * * *")
-    void run() {
-        List<Notification> messages = notificationRepository.findAllByDateTime(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        messages.forEach(task -> {
-            SendMessage message = new SendMessage(task.getChatId(), task.getMassage());
-            telegramBot.execute(message);
-            logger.info("Уведомление отправлено: chatId = " + task.getChatId() + " , text = " + task.getMassage());
-            notificationRepository.deleteById(task.getId());
-            logger.info("Уведомление удалено из БД");
-        });
-    }
+//    private  final NotificationRepository notificationRepository;
+//    private  final TelegramBot telegramBot;
+//
+//    public TimeManager(NotificationRepository notificationRepository, TelegramBot telegramBot) {
+//        this.notificationRepository = notificationRepository;
+//        this.telegramBot = telegramBot;
+//    }
+//
+//    @Scheduled(cron = "0 0/1 * * * *")
+//    void run() {
+//        List<Notification> messages = notificationRepository.findAllByDateTime(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+//        messages.forEach(task -> {
+//            SendMessage message = new SendMessage(task.getChatId(), task.getMassage());
+//            telegramBot.execute(message);
+//            logger.info("Уведомление отправлено: chatId = " + task.getChatId() + " , text = " + task.getMassage());
+//            notificationRepository.deleteById(task.getId());
+//            logger.info("Уведомление удалено из БД");
+//        });
+//    }
 
 
 

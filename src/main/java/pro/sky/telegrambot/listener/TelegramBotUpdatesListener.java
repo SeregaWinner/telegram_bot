@@ -40,47 +40,47 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         telegramBot.setUpdatesListener(this);
     }
 
-    @Override
-    public int process(List<Update> updates) {
-        updates.forEach(update -> {
-            logger.info("Processing update: {}", update);
-            Long chatId = update.message().chat().id();
-            String textMessage = update.message().text();
-            Matcher matcher = pattern.matcher(textMessage);
-            // Process your updates here
-            if (textMessage.equals("/start")) {
-                sendMessage(chatId, "Добро пожаловать в ТГ бот <События>.\n" +
-                        "Для создания уведомления отправьте мне сообщение согласно паттерну:\n" +
-                        "дд.мм.гггг чч:мм <Текст уведомления> ");
-            } else if (matcher.matches()) {
-                LocalDateTime date = LocalDateTime.parse(matcher.group(1), dateTimeFormatter);
-                String item = matcher.group(3);
-                try {
-                    if (!date.isAfter(LocalDateTime.now())) {
-                        throw new IllegalDateTimeException("Указана не верная дата или время");
-                    }
-                    Notification notification = new Notification(chatId, item, date);
-                    sendMessage(chatId, "Уведомление успешно создано, ожидайте");
-                    notificationRepository.save(notification);
-                    logger.info("Уведомление создано");
-                } catch (IllegalDateTimeException e) {
-                    sendMessage(chatId, "Указана не верная дата или время");
-                    logger.info("Отправлена неправильная дата");
-                }
-            } else {
-                sendMessage(chatId, "Команда введена не верно!");
-                logger.info("В чат отправлена не верная команда!");
-            }
-        });
-        return UpdatesListener.CONFIRMED_UPDATES_ALL;
-    }
-
-    private SendResponse sendMessage(Long chatId, String message) {
-        SendMessage sendMessage = new SendMessage(chatId, message);
-        SendResponse sendResponse = telegramBot.execute(sendMessage);
-        logger.info("Отправлено в чат: " + message);
-        return sendResponse;
-    }
+//    @Override
+//    public int process(List<Update> updates) {
+//        updates.forEach(update -> {
+//            logger.info("Processing update: {}", update);
+//            Long chatId = update.message().chat().id();
+//            String textMessage = update.message().text();
+//            Matcher matcher = pattern.matcher(textMessage);
+//            // Process your updates here
+//            if (textMessage.equals("/start")) {
+//                sendMessage(chatId, "Добро пожаловать в ТГ бот <События>.\n" +
+//                        "Для создания уведомления отправьте мне сообщение согласно паттерну:\n" +
+//                        "дд.мм.гггг чч:мм <Текст уведомления> ");
+//            } else if (matcher.matches()) {
+//                LocalDateTime date = LocalDateTime.parse(matcher.group(1), dateTimeFormatter);
+//                String item = matcher.group(3);
+//                try {
+//                    if (!date.isAfter(LocalDateTime.now())) {
+//                        throw new IllegalDateTimeException("Указана не верная дата или время");
+//                    }
+//                    Notification notification = new Notification(chatId, item, date);
+//                    sendMessage(chatId, "Уведомление успешно создано, ожидайте");
+//                    notificationRepository.save(notification);
+//                    logger.info("Уведомление создано");
+//                } catch (IllegalDateTimeException e) {
+//                    sendMessage(chatId, "Указана не верная дата или время");
+//                    logger.info("Отправлена неправильная дата");
+//                }
+//            } else {
+//                sendMessage(chatId, "Команда введена не верно!");
+//                logger.info("В чат отправлена не верная команда!");
+//            }
+//        });
+//        return UpdatesListener.CONFIRMED_UPDATES_ALL;
+//    }
+//
+//    private SendResponse sendMessage(Long chatId, String message) {
+//        SendMessage sendMessage = new SendMessage(chatId, message);
+//        SendResponse sendResponse = telegramBot.execute(sendMessage);
+//        logger.info("Отправлено в чат: " + message);
+//        return sendResponse;
+//    }
 
 
 }

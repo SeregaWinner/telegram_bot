@@ -18,27 +18,27 @@ public class Notification {
         this.massage = massage;
         this.dateTime = dateTime;
     }
-
-    public Notification() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getChatId() {
-        return chatId;
-    }
-
-    public String getMassage() {
-        return massage;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//
+//    public Notification() {
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public Long getChatId() {
+//        return chatId;
+//    }
+//
+//    public String getMassage() {
+//        return massage;
+//    }
+//
+//    public LocalDateTime getDateTime() {
+//        return dateTime;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 }
